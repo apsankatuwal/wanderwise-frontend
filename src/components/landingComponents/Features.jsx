@@ -47,7 +47,7 @@ const Features = () => {
                         return (
                             <div onClick={()=>{navigate(feature.link)}} className='border rounded p-4 border-gray-300'>
 
-                                <feature.icon size={40} className="text-blue-600 mb-4" />
+                                <feature.icon size={40} className="text-emerald-600 mb-4" />
                                 
                                 <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
                                 <p>{feature.content}</p>
