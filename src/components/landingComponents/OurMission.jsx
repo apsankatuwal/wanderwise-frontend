@@ -12,23 +12,23 @@ const OurMission = () => {
         experiences that <br />
         cater to the diverse interests of our travelers.
       </p>
-     <div className="grid grid-cols-3 mt-20 border border-amber-100">
+     <div className="grid grid-cols-3 mt-20 font-bold border-amber-100">
   
   <div className="text-center py-6 border-r border-amber-100">
     <p className="text-3xl font-bold mt-3">300+</p>
-    <p>Clients Served</p>
+    <p className="text-xl italic">Clients Served</p>
   </div>
 
   <div className="text-center py-6 border-r border-amber-100 mt-3">
     <p className="text-3xl font-bold flex items-center justify-center gap-2">
       4.8🌟
     </p>
-    <p>Overall Rating</p>
+    <p className="text-xl italic">Overall Rating</p>
   </div>
 
   <div className="text-center py-6 mt-3">
     <p className="text-3xl font-bold">20+</p>
-    <p>Countries Linked</p>
+    <p className="text-xl italic">Countries Linked</p>
   </div>
 
 </div>

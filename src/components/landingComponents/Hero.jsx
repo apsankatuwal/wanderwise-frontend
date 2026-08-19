@@ -29,7 +29,7 @@ const Hero = () => {
             travel plans with others. Start planning your next adventure today!
           </p>
 
-       <CustomButton text="Get Started"  />
+       <CustomButton text="Get Started" />
         </div>
       </div>
     </div>
