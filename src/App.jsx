@@ -19,8 +19,11 @@ import Trip from "./pages/trips/Trip";
 import AddTrip from "./pages/trips/AddTrip";
 import EditTrip from "./pages/trips/EditTrip";
 import Tripdetails from "./pages/trips/Tripdetails";
+import PrivateLayout from "./layouts/PrivateLayout";
 
 import useAuth from "./hooks/useAuth";
+import Baggage from "./pages/baggage/Baggage";
+import BaggageDetails from "./pages/baggage/BaggageDetails";
 
 const ProtectedRoutes = () => {
   const { token, onLogout } = useAuth();
@@ -73,15 +76,18 @@ const App = () => {
 
         {/* Protected Routes */}
         <Route element={<ProtectedRoutes />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/trips" element={<Trip />} />
-          <Route path="/trips/add" element={<AddTrip />} />
-          <Route path="/trips/:tripId" element={<Tripdetails />} />
-          <Route path="/trips/:tripId/edit" element={<EditTrip />} />
+          <Route element={<PrivateLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/trips" element={<Trip />} />
+            <Route path="/trips/add" element={<AddTrip />} />
+            <Route path="/trips/:tripId" element={<Tripdetails />} />
+            <Route path="/trips/:tripId/edit" element={<EditTrip />} />
+            <Route path='/baggage' element={<Baggage />} />
+            <Route path='/baggage/:id' element={<BaggageDetails />} />
+          </Route>
         </Route>
 
-        {/* Unknown route */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+
       </Routes>
     </BrowserRouter>
   );

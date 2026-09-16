@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Compass, LogOut, Menu, Plus, X } from "lucide-react";
+import { Compass, LogOut, Luggage, Menu, Plus, X } from "lucide-react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
 
 const navigation = [
   { label: "Dashboard", to: "/dashboard" },
   { label: "My trips", to: "/trips" },
+  { label: "Baggage", to: "/baggage" },
 ];
 
 const AppNavbar = () => {

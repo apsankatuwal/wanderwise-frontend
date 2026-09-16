@@ -1,152 +1,196 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Compass, Menu, X } from "lucide-react";
+import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+
+const publicNavigation = [
+  { label: "Destinations", to: "/destinations" },
+  { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
+];
+
+const privateNavigation = [
+  { label: "Destinations", to: "/destinations" },
+  { label: "Itineraries", to: "/itineraries" },
+  { label: "Trips", to: "/trips" },
+  { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
+];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const { token, onLogout } = useAuth();
+
+  const navigation = token ? privateNavigation : publicNavigation;
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    onLogout();
+    closeMenu();
+  };
+
+  const navLinkClass = ({ isActive }) =>
+    `rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+      isActive
+        ? "bg-sky-50 text-sky-800"
+        : "text-slate-600 hover:bg-slate-50 hover:text-sky-700"
+    }`;
+
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
 
         {/* Logo */}
-        <a
-          href="/"
-          className="flex items-center gap-2 text-slate-900 font-semibold text-lg"
+        <Link
+          to="/"
+          onClick={closeMenu}
+          className="flex items-center gap-2 text-lg font-semibold text-slate-900"
         >
-          <Compass className="w-5 h-5 text-blue-700" />
-          Wanderwise
-        </a>
+          <Compass
+            className="h-5 w-5 text-sky-700"
+            aria-hidden="true"
+          />
+
+          <span>Wanderwise</span>
+        </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          <a
-            href="/destinations"
-            className="text-sm font-medium text-slate-600 hover:text-blue-700 transition-colors"
-          >
-            Destinations
-          </a>
-
-          <a
-            href="/itineraries"
-            className="text-sm font-medium text-slate-600 hover:text-blue-700 transition-colors"
-          >
-            Itineraries
-          </a>
-
-          <a
-            href="/trips"
-            className="text-sm font-medium text-slate-600 hover:text-blue-700 transition-colors"
-          >
-            Trips
-          </a>
-
-          <a
-            href="/about"
-            className="text-sm font-medium text-slate-600 hover:text-blue-700 transition-colors"
-          >
-            About
-          </a>
-
-          <a
-            href="/contact"
-            className="text-sm font-medium text-slate-600 hover:text-blue-700 transition-colors"
-          >
-            Contact
-          </a>
+        <nav
+          className="hidden items-center gap-1 md:flex"
+          aria-label="Main navigation"
+        >
+          {navigation.map(({ label, to }) => (
+            <NavLink
+              key={to}
+              to={to}
+              className={navLinkClass}
+            >
+              {label}
+            </NavLink>
+          ))}
         </nav>
 
-        {/* Login register */}
-        <div className="hidden md:flex items-center gap-4">
-          <a
-            href="/login"
-            className="text-sm font-medium text-slate-700 hover:text-slate-900"
-          >
-            Log In
-          </a>
+        {/* Desktop Authentication */}
+        <div className="hidden items-center gap-3 md:flex">
+          {token ? (
+            <>
+              <Link
+                to="/dashboard"
+                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900"
+              >
+                Dashboard
+              </Link>
 
-          <a
-            href="/register"
-            className="text-sm font-medium bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors"
-          >
-            Register
-          </a>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="rounded-lg bg-sky-700 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-800"
+              >
+                Log out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900"
+              >
+                Log In
+              </Link>
+
+              <Link
+                to="/register"
+                className="rounded-lg bg-sky-700 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-800"
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-slate-700"
-          onClick={() => setMenuOpen(!menuOpen)}
+          type="button"
+          onClick={() => setMenuOpen((open) => !open)}
+          className="rounded-md p-2 text-slate-700 transition-colors hover:bg-slate-100 md:hidden"
+          aria-expanded={menuOpen}
+          aria-label={
+            menuOpen
+              ? "Close navigation menu"
+              : "Open navigation menu"
+          }
         >
           {menuOpen ? (
-            <X className="w-6 h-6" />
+            <X className="h-5 w-5" />
           ) : (
-            <Menu className="w-6 h-6" />
+            <Menu className="h-5 w-5" />
           )}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Navigation */}
       {menuOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white px-6 py-4 space-y-4">
-
-          <a
-            href="/destinations"
-            className="block text-sm font-medium text-slate-700 hover:text-blue-700"
-            onClick={() => setMenuOpen(false)}
+        <div className="border-t border-slate-200 bg-white px-4 py-3 md:hidden">
+          <nav
+            className="flex flex-col gap-1"
+            aria-label="Mobile navigation"
           >
-            Destinations
-          </a>
+            {navigation.map(({ label, to }) => (
+              <NavLink
+                key={to}
+                to={to}
+                className={navLinkClass}
+                onClick={closeMenu}
+              >
+                {label}
+              </NavLink>
+            ))}
 
-          <a
-            href="/itineraries"
-            className="block text-sm font-medium text-slate-700 hover:text-blue-700"
-            onClick={() => setMenuOpen(false)}
-          >
-            Itineraries
-          </a>
+            {/* Mobile Authentication */}
+            <div className="mt-2 flex items-center gap-3 border-t border-slate-100 px-3 pt-3">
+              {token ? (
+                <>
+                  <Link
+                    to="/dashboard"
+                    onClick={closeMenu}
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+                  >
+                    Dashboard
+                  </Link>
 
-          <a
-            href="/trips"
-            className="block text-sm font-medium text-slate-700 hover:text-blue-700"
-            onClick={() => setMenuOpen(false)}
-          >
-            Trips
-          </a>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="rounded-lg bg-sky-700 px-3 py-2 text-sm font-medium text-white hover:bg-sky-800"
+                  >
+                    Lognout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    onClick={closeMenu}
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+                  >
+                    Log In
+                  </Link>
 
-          <a
-            href="/about"
-            className="block text-sm font-medium text-slate-700 hover:text-blue-700"
-            onClick={() => setMenuOpen(false)}
-          >
-            About
-          </a>
-
-          <a
-            href="/contact"
-            className="block text-sm font-medium text-slate-700 hover:text-blue-700"
-            onClick={() => setMenuOpen(false)}
-          >
-            Contact
-          </a>
-
-          {/* Mobile Login /register */}
-          <div className="flex gap-4 pt-2">
-            <a
-              href="/login"
-              className="text-sm font-medium text-slate-700"
-              onClick={() => setMenuOpen(false)}
-            >
-              Log In
-            </a>
-
-            <a
-              href="/rregister"
-              className="text-sm font-medium bg-blue-800 text-white px-4 py-2 rounded-lg"
-              onClick={() => setMenuOpen(false)}
-            >
-              Register
-            </a>
-          </div>
+                  <Link
+                    to="/register"
+                    onClick={closeMenu}
+                    className="rounded-lg bg-sky-700 px-3 py-2 text-sm font-medium text-white hover:bg-sky-800"
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
+            </div>
+          </nav>
         </div>
       )}
     </header>
