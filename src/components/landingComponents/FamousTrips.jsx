@@ -33,25 +33,43 @@ const FamousTrips = () => {
     const navigate = useNavigate();
 
     return (
-        <div className='px-20 py-24'>
+        <div className='px-6 py-24 sm:px-10 lg:px-20'>
             {/* heading */}
-            <div>
-                <h2 className='text-4xl font-bold text-center'>Famous Trips</h2>
+            <div className="text-center">
+                <h2 className='text-4xl font-bold tracking-tight text-slate-900'>Famous Trips</h2>
+                <p className="mt-3 text-slate-500">A few favorite destinations to get you started.</p>
             </div>
 
             {/* content  */}
-            <div className='grid md:grid-cols-2 grid-cols-1 lg:grid-cols-4 gap-6 mt-20'>
+            <div className='mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
                 {
-                    tripsData.map((feature, index)=>{
+                    tripsData.map((trip, index) => {
                         return (
-                            <div onClick={()=>{navigate(feature.link)}} className='border rounded p-4 border-gray-300 md:bg-blue-200 bg-green-300 '>
-
-                                <div className='w-full h-46 overflow-hidden rounded mb-4'>
-                                    <img className='w-full ' src={feature.Image} alt={feature.title} />
+                            <div
+                                key={trip.title}
+                                onClick={() => { navigate(trip.link) }}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter" || e.key === " ") {
+                                        e.preventDefault();
+                                        navigate(trip.link);
+                                    }
+                                }}
+                                role="button"
+                                tabIndex={0}
+                                className="group cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md hover:ring-1 hover:ring-sky-100 focus:outline-none focus:ring-2 focus:ring-sky-300"
+                            >
+                                <div className='h-48 w-full overflow-hidden'>
+                                    <img
+                                        className='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
+                                        src={trip.Image}
+                                        alt={trip.title}
+                                    />
                                 </div>
 
-                                <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
-                                <p>{feature.content}</p>
+                                <div className="p-5">
+                                    <h3 className="mb-2 text-lg font-semibold text-slate-900">{trip.title}</h3>
+                                    <p className="text-sm leading-relaxed text-slate-500">{trip.content}</p>
+                                </div>
                             </div>
                         )
                     })
