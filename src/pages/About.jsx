@@ -9,6 +9,7 @@ import {
   Share2,
   Mail,
 } from "lucide-react";
+import Navbar from "../components/common/Navbar";
 
 /**
  * About.jsx
@@ -78,70 +79,16 @@ const footerLinks = {
 export default function About() {
   return (
     <div className="min-h-screen bg-white text-slate-900 antialiased">
-      {/* ---------------- Navbar ---------------- */}
-      <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link to="/" className="flex items-center gap-2">
-            <Compass className="h-6 w-6 text-sky-700" strokeWidth={2.25} />
-            <span className="text-lg font-semibold tracking-tight">Wanderwise</span>
-          </Link>
-
-          <ul className="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
-            <li>
-              <Link to="/destinations" className="transition hover:text-slate-900">
-                Destinations
-              </Link>
-            </li>
-            <li>
-              <Link to="/itineraries" className="transition hover:text-slate-900">
-                Itineraries
-              </Link>
-            </li>
-            <li>
-              <Link to="/pricing" className="transition hover:text-slate-900">
-                Pricing
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/about"
-                className="relative text-sky-700 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:bg-sky-700 after:content-['']"
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" className="transition hover:text-slate-900">
-                Contact
-              </Link>
-            </li>
-          </ul>
-
-          <div className="flex items-center gap-3">
-            <Link
-              to="/login"
-              className="hidden text-sm font-medium text-slate-600 transition hover:text-slate-900 sm:block"
-            >
-              Log In
-            </Link>
-            <Link
-              to="/signup"
-              className="rounded-lg bg-sky-700 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-sky-800"
-            >
-              Sign Up
-            </Link>
-          </div>
-        </nav>
-      </header>
+      <Navbar />
 
       {/* ---------------- Hero ---------------- */}
-      <section className="relative isolate flex min-h-[560px] items-center justify-center overflow-hidden">
+      <section className="relative isolate flex min-h-140 items-center justify-center overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2000&q=80"
           alt="Mountain lake at golden hour"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/20 to-white/60" />
+        <div className="absolute inset-0 bg-linear-to-b from-white/10 via-white/20 to-white/60" />
 
         <div className="relative mx-6 max-w-xl rounded-2xl border border-white/40 bg-white/85 p-10 text-center shadow-xl backdrop-blur-md">
           <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
@@ -177,7 +124,7 @@ export default function About() {
             <img
               src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80"
               alt="Traveler looking out over a coastal cliff"
-              className="h-[520px] w-full object-cover"
+              className="h-130 w-full object-cover"
             />
           </div>
 
@@ -218,9 +165,9 @@ export default function About() {
           <img
             src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=2000&q=80"
             alt="Vintage compass resting on a world map"
-            className="h-[420px] w-full object-cover"
+            className="h-105 w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/40 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-r from-white/90 via-white/40 to-transparent" />
 
           <div className="absolute inset-y-0 left-0 flex max-w-md flex-col justify-center p-10">
             <h3 className="text-2xl font-semibold tracking-tight text-slate-900">
@@ -273,7 +220,7 @@ export default function About() {
           <img
             src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=2000&q=80"
             alt="Travelers planning a trip together"
-            className="h-[380px] w-full object-cover"
+            className="h-95 w-full object-cover"
           />
           <div className="absolute inset-0 bg-slate-900/70" />
 

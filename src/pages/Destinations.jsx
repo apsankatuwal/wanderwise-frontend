@@ -20,7 +20,9 @@ import { Mountain, MapPin } from "lucide-react";
 const Destinations = () => {
   return (
     <div className="min-h-screen bg-neutral-100 flex flex-col items-center">
-      <Navbar />
+      <div className="w-full">
+        <Navbar />
+      </div>
 
       <div className="py-10">
         <Card className="w-full max-w-sm overflow-hidden rounded-2xl border-0 shadow-md p-0 gap-0">

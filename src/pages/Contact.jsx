@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
+import Navbar from "../components/common/Navbar";
 import {
-  Compass,
   Mail,
   Phone,
   MapPin,
@@ -10,15 +10,6 @@ import {
   ArrowRight,
   Send,
 } from "lucide-react";
-
-/**
- * Contact.jsx
- * WanderWise — Contact page
- *
- * Stack: React (Vite) + Tailwind CSS + lucide-react + react-router-dom
- * No useState / useEffect — the FAQ accordion uses native <details>/<summary>,
- * which is fully static/uncontrolled and needs no React state.
- */
 
 const contactDetails = [
   {
@@ -80,61 +71,7 @@ const footerLinks = [
 export default function Contact() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 antialiased">
-      {/* ---------------- Navbar ---------------- */}
-      <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link to="/" className="flex items-center gap-2">
-            <Compass className="h-6 w-6 text-sky-700" strokeWidth={2.25} />
-            <span className="text-lg font-semibold tracking-tight">Wanderwise</span>
-          </Link>
-
-          <ul className="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
-            <li>
-              <Link to="/destinations" className="transition hover:text-slate-900">
-                Destinations
-              </Link>
-            </li>
-            <li>
-              <Link to="/itineraries" className="transition hover:text-slate-900">
-                Itineraries
-              </Link>
-            </li>
-            <li>
-              <Link to="/pricing" className="transition hover:text-slate-900">
-                Pricing
-              </Link>
-            </li>
-            <li>
-              <Link to="/about" className="transition hover:text-slate-900">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/contact"
-                className="relative text-sky-700 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:bg-sky-700 after:content-['']"
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
-
-          <div className="flex items-center gap-3">
-            <Link
-              to="/login"
-              className="hidden rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 transition hover:text-slate-900 sm:block"
-            >
-              Log In
-            </Link>
-            <Link
-              to="/signup"
-              className="rounded-lg bg-sky-700 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-sky-800"
-            >
-              Sign Up
-            </Link>
-          </div>
-        </nav>
-      </header>
+      <Navbar />
 
       {/* ---------------- Hero ---------------- */}
       <section className="mx-auto max-w-3xl px-6 pb-4 pt-20 text-center">
