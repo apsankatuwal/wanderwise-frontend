@@ -24,6 +24,7 @@ import PrivateLayout from "./layouts/PrivateLayout";
 import useAuth from "./hooks/useAuth";
 import Baggage from "./pages/baggage/Baggage";
 import BaggageDetails from "./pages/baggage/BaggageDetails";
+import AcceptInvitation from "./pages/AcceptInvitation";
 
 const ProtectedRoutes = () => {
   const { token, onLogout } = useAuth();
@@ -84,6 +85,7 @@ const App = () => {
             <Route path="/trips/:tripId/edit" element={<EditTrip />} />
             <Route path='/baggage' element={<Baggage />} />
             <Route path='/baggage/:id' element={<BaggageDetails />} />
+            <Route path='/trips/:id/invite/accept' element={<AcceptInvitation/>} />
           </Route>
         </Route>
 

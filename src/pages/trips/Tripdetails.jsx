@@ -17,6 +17,7 @@ import { toast } from 'sonner'
 import { formatDate } from '../../lib/utils'
 import { ArrowLeft, Luggage, SquarePen, Trash2 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import TripInfo from '@/components/common/TripInfo'
 
 const TripDetails = () => {
   const { tripId: id } = useParams()
@@ -70,58 +71,12 @@ const TripDetails = () => {
 
       <div className="flex flex-col gap-6 lg:flex-row">
 
-        {/* Left part */}
-        <Card className="w-full rounded-2xl border-none shadow-sm ring-1 ring-slate-100 lg:w-3/4">
-          <CardHeader className="border-b border-slate-100">
-            <CardTitle className="text-xl font-semibold tracking-tight text-slate-900">
-              {trip.title}
-            </CardTitle>
-
-            <CardDescription className="text-sm text-slate-500">
-              {formatDate(trip.startDate)} - {formatDate(trip.endDate)}
-            </CardDescription>
-
-            <CardAction className="flex gap-2">
-              <Link to={`/trips/${id}/edit`}>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="text-slate-500 hover:bg-sky-50 hover:text-sky-700"
-                >
-                  <SquarePen className="h-4 w-4" />
-                </Button>
-              </Link>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={onDelete}
-                className="text-slate-500 hover:bg-red-50 hover:text-red-600"
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
-            </CardAction>
-          </CardHeader>
-
-          <CardContent className="space-y-2 pt-6 text-sm text-slate-600">
-            {trip.description && <p>{trip.description}</p>}
-            <p>Budget: Rs. {trip.budget?.total ?? 0}</p>
-            <p>Spent: Rs. {trip.budget?.spent ?? 0}</p>
-            <p>Destinations: {trip.destinations?.join(", ") || "N/A"}</p>
-          </CardContent>
-
-          <CardFooter className="border-t border-slate-100 pt-4">
-            <Link to={`/baggage/${id}`} className="w-full">
-              <Button
-                variant="outline"
-                className="w-full gap-1.5 text-slate-700 hover:bg-sky-50 hover:text-sky-700"
-              >
-                <Luggage className="h-4 w-4" />
-                View Packing List
-              </Button>
-            </Link>
-          </CardFooter>
-        </Card>
-
+  {/* left part  */}
+      <Card className="w-3/4">
+        
+        <TripInfo trip={trip} />
+      </Card>
+        
         {/* Right part */}
         <div className="flex w-full flex-col gap-4 lg:w-1/4">
           <ExpenseForm trip={trip} />
@@ -129,6 +84,7 @@ const TripDetails = () => {
         </div>
 
       </div>
+
     </div>
   )
 }

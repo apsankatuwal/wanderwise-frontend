@@ -99,16 +99,32 @@ const Register = () => {
 
       // Navigation is handled by useEffect
     } catch (error) {
-      console.error("Registration error:", error);
+  console.error("Registration error:", error);
 
-      const message =
-        error.response?.data?.message ||
-        error.response?.data?.error ||
-        error.message ||
-        "Registration failed. Please try again.";
+  const backendErrors = error.response?.data?.errors;
 
-      toast.error(message);
+  if (backendErrors?.length > 0) {
+    const firstError = backendErrors[0];
+
+    if (firstError.field === "email") {
+      form.setError("email", {
+        type: "server",
+        message: "Email already exists.",
+      });
     }
+
+    toast.error(firstError.message);
+    return;
+  }
+
+  const message =
+    error.response?.data?.message ||
+    error.response?.data?.error ||
+    error.message ||
+    "Registration failed. Please try again.";
+
+  toast.error(message);
+}
   };
 
   return (
