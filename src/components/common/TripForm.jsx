@@ -17,6 +17,7 @@ import { Field, FieldError, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
+
 const formSchema = z
   .object({
     title: z.string().min(5, "Must be at least 5 characters"),
@@ -36,7 +37,15 @@ const formSchema = z
   .refine((data) => data.startDate <= data.endDate, {
     message: "Start date must be before end date",
     path: ["startDate"],
-  });
+  })
+  .refine(
+    (data) => data.startDate >= new Date().toISOString().split("T")[0],
+    {
+      message: "Start date cannot be in the past",
+      path: ["startDate"],
+    }
+  );
+
 const TripForm = () => {
   const navigate = useNavigate();
   const form = useForm({
@@ -167,6 +176,7 @@ const TripForm = () => {
                       {...field}
                       id={field.name}
                       type="date"
+                      min={new Date().toISOString().split("T")[0]}
                       aria-invalid={fieldState.invalid}
                       className="border-slate-200 focus-visible:ring-sky-200"
                     />{" "}

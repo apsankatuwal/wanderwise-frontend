@@ -1,4 +1,3 @@
-
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import api from '@/api/axios'
@@ -585,20 +584,20 @@ const Dashboard = () => {
                 <Link
                   key={dest}
                   to={`/trips/${destTrips[0]._id}`}
-                  className="group overflow-hidden rounded-2xl border border-slate-100 transition-shadow hover:shadow-md"
+                  className="group block w-full overflow-hidden rounded-2xl border border-slate-100 transition-shadow hover:shadow-md"
                 >
 
                   {/* Destination image */}
-                  <div className="relative h-28 overflow-hidden bg-slate-100">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
 
                     {destinationImages[dest] ? (
                       <img
                         src={destinationImages[dest]}
                         alt={dest}
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     ) : (
-                      <div className="flex h-full items-center justify-center bg-gradient-to-br from-sky-600 to-sky-800">
+                      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-sky-600 to-sky-800">
                         <MapPin className="h-8 w-8 text-white/80" />
                       </div>
                     )}
