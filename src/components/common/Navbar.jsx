@@ -4,11 +4,13 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const publicNavigation = [
+  { label: "Destinations", to: "/destinations" },
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
 ];
 
 const privateNavigation = [
+  { label: "Destinations", to: "/destinations" },
   { label: "Itineraries", to: "/itineraries" },
   { label: "Trips", to: "/trips" },
   { label: "About", to: "/about" },

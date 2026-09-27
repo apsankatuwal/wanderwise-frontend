@@ -13,6 +13,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Destinations from "./pages/Destinations";
 import Dashboard from "./pages/Dashboard";
 import Trip from "./pages/trips/Trip";
 import AddTrip from "./pages/trips/AddTrip";
@@ -72,7 +73,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        
+        <Route path="/destinations" element={<Destinations />} />
 
         {/* Protected Routes */}
         <Route element={<ProtectedRoutes />}>
