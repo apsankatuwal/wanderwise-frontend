@@ -260,7 +260,7 @@ export default function Contact() {
         <div className="mt-10 overflow-hidden rounded-2xl border border-slate-100 shadow-sm">
           <iframe
             title="WanderWise HQ location"
-            src="https://www.google.com/maps?q=Thamel,Kathmandu,Nepal&output=embed"
+            src="https://www.google.com/maps?q=Biratnagar,Nepal&output=embed"
             className="h-105 w-full grayscale"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
